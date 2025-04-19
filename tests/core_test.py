@@ -1,4 +1,4 @@
-def run_ai_agent_test():
+def run_core_logic():
     return {
         "agent_id": "agent_001",
         "result": "passed",

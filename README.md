@@ -1,97 +1,99 @@
-# AI Agent Test API (Multi-language)
+# AI Agent Test API Adapter
 
-This project demonstrates a simple HTTP API for running Python-based AI agent tests.
-It is designed to integrate easily with external test frameworks written in various languages.
+This is a lightweight FastAPI-based adapter that exposes a unified REST API interface for triggering automated tests for AI agents. It is designed to be portable, easy to launch, and compatible with multiple client environments such as Python, Java, JavaScript, Go, and C++.
+
+## 🚀 Features
+
+- Run AI-related tests via simple API calls
+- Supports multiple test types (core logic, unit tests, data analysis, etc.)
+- Swagger UI included for interactive testing
+- Works with any client (Postman, curl, browser, Java, etc.)
+- Portable via `.bat` scripts for Windows systems
+
+## 🔧 Requirements
+
+- Python 3.11+
+- Dependencies listed in `requirements.txt`
+
+## ▶ How to Start
+
+### Step 1: Create and activate virtual environment
+
+```bash
+python -m venv venv
+.env\Scriptsctivate      # For Windows
+```
+
+### Step 2: Install requirements
+
+```bash
+pip install -r requirements.txt
+```
+
+### Step 3: Run the server
+
+```bash
+uvicorn main:app --reload
+```
 
 ---
 
-## Supported Languages
+## 🌐 Available Endpoints
 
-Call the endpoint `/run-test/{client_lang}` using any of the following values:
+### 🔹 Swagger UI (Main Interface)
+**URL:** [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)  
+Use this interface to interactively test all available endpoints.
 
-- `java`
+### 🔹 Root Page
+**GET /**  
+Returns a welcome message and useful links.
+
+### 🔹 Health Check
+**GET /healthcheck**  
+Checks if the API is running. Returns: `{ "status": "ok" }`
+
+### 🔹 Run AI Tests
+**GET /run-test/{client_lang}**  
+Run tests and get results.
+
+**Example:**  
+`http://127.0.0.1:8000/run-test/python`
+
+`client_lang` can be:
 - `python`
+- `java`
 - `js`
 - `go`
 - `c++`
 
-The response will include the requested client language.
-
 ---
 
-## How to Use
+## 🧪 Example curl Request
 
-1. Open PowerShell and go to the project folder
-
-```powershell
-cd path\to\your\project
-```
-
-2. Create a virtual environment (only once)
-
-```powershell
-python -m venv venv
-```
-
-3. Activate the environment
-
-```powershell
-venv\Scripts\Activate.ps1
-```
-
-4. Install dependencies
-
-```powershell
-pip install -r requirements.txt
-```
-
-5. Start the server manually:
-
-```powershell
-uvicorn main:app --reload
-```
-
-Or double-click `start_api.bat`
-
----
-
-## Example API Call
-
-**Request:**
-```
-GET /run-test/java
-```
-
-**Response:**
-```json
-{
-  "agent_id": "agent_001",
-  "result": "passed",
-  "metrics": {
-    "accuracy": 0.95
-  },
-  "client": "java"
-}
+```bash
+curl -X GET "http://127.0.0.1:8000/run-test/python" -H "accept: application/json"
 ```
 
 ---
 
-## Scripts
+## 📁 Project Structure
 
-- `start_api.bat` — launches the server in a new window and opens Swagger
-- `stop_api.bat` — stops the Uvicorn server
-- `reset_venv.bat` — removes and recreates the virtual environment with dependencies---
+```
+ai_tests_api_adapter/
+│
+├── main.py                 # Main FastAPI app
+├── requirements.txt        # Dependencies
+├── start_api.bat           # Starts server (Windows)
+├── stop_api.bat            # Stops server (Windows)
+├── tests/
+│   ├── core_test.py        # Core logic test
+│   └── agent_test.py       # Sample unit test
+└── README.md               # This file
+```
 
-## API Documentation (Swagger UI)
+---
 
-Once the server is running, you can access the interactive documentation by opening the following link in your browser:
+## 🧩 License
 
-🔗 [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
-
-This page is auto-generated using [Swagger UI](https://swagger.io/tools/swagger-ui/).  
-It allows you to:
-- View available endpoints
-- See example requests and responses
-- Test the API directly from the browser without writing any code
-
-> ✅ Useful for developers, testers, and even non-technical stakeholders to explore the API in a user-friendly interface.
+This project is currently shared for demonstration and review purposes only.
+License terms will be defined later if the project is to be reused or published.
